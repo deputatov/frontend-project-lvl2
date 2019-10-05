@@ -11,8 +11,14 @@ Features:
 * Support different formats
 * Report generation as **plain text**, **pretty** and **json** formats
 
-## Install package
+## Install
 
 ```$ sudo npm i -g frontend-project-lvl2-deputatovn```
 
 <p align="center"> <img width=auto height=auto src="gif/install.gif"> </p>
+
+## Usage
+
+```$ gendiff file1.json file2.json```
+
+<p align="center"> <img width=auto height=auto src="gif/usage.gif"> </p>

@@ -1,15 +1,27 @@
-import commander from 'commander';
-import packageJSON from '../package.json';
+import fs from 'fs';
+import path from 'path';
 
-const runHelp = () => {
-  commander
-    .version(packageJSON.version)
-    .description('Compares two configuration files and shows a difference.')
-    .option('-f, --format [type]', 'Output format')
-    .arguments('<filepath1> <filepath2>')
-    .action((filepath1, filepath2) => console.log(filepath1, filepath2, commander.format))
-    .parse(process.argv);
-  if (!commander.args.length) commander.help();
+const parseFile = (filepath) => {
+  const fileData = fs.readFileSync(path.resolve(filepath), (err, data) => {
+    if (err) throw err;
+    return data;
+  });
+  return JSON.parse(fileData);
 };
 
-export default runHelp;
+const generateDifference = (pathToFile1, pathToFile2) => {
+  const data1 = parseFile(pathToFile1);
+  const data2 = parseFile(pathToFile2);
+
+  const dataKeys = [...new Set([...Object.keys(data1), ...Object.keys(data2)])];
+
+  return `{\n${dataKeys
+    .map((key) => {
+      if (data1[key] === data2[key]) return `    ${key}: ${data1[key]}`;
+      if (key in data1 && !(key in data2)) return `  - ${key}: ${data1[key]}`;
+      if (key in data2 && !(key in data1)) return `  + ${key}: ${data2[key]}`;
+      return `  + ${key}: ${data2[key]}\n  - ${key}: ${data1[key]}`;
+    }).join('\n')}\n}`;
+};
+
+export default generateDifference;

@@ -5,4 +5,4 @@ publish:
 lint:
 	npx eslint .
 start:
-	npx babel-node src/bin/gendiff.js
+	npx babel-node src/bin/gendiff.js ~/before.json ~/after.json

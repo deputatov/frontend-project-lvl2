@@ -1,4 +1,5 @@
 #!/usr/bin/env node
-import runHelp from '..';
 
-runHelp();
+import runCLI from '../cli';
+
+runCLI();
