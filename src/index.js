@@ -9,7 +9,7 @@ const parseFile = (filepath) => {
   return JSON.parse(fileData);
 };
 
-const generateDifference = (pathToFile1, pathToFile2) => {
+const genDiff = (pathToFile1, pathToFile2) => {
   const data1 = parseFile(pathToFile1);
   const data2 = parseFile(pathToFile2);
 
@@ -24,4 +24,4 @@ const generateDifference = (pathToFile1, pathToFile2) => {
     }).join('\n')}\n}`;
 };
 
-export default generateDifference;
+export default genDiff;
