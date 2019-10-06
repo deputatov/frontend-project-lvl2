@@ -1,6 +1,6 @@
-import genDiff from '../src';
 import path from 'path';
 import fs from 'fs';
+import genDiff from '../src';
 
 const data1 = path.resolve(__dirname, '__fixtures__/before.json');
 const data2 = path.resolve(__dirname, '__fixtures__/after.json');
