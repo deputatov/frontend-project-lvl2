@@ -2,10 +2,18 @@ import path from 'path';
 import fs from 'fs';
 import genDiff from '../src';
 
-const data1 = path.resolve(__dirname, '__fixtures__/before.json');
-const data2 = path.resolve(__dirname, '__fixtures__/after.json');
-const expected = fs.readFileSync(path.resolve(__dirname, '__fixtures__/expectedJSON'), 'utf8');
+const expected = fs.readFileSync(path.resolve(__dirname, '__fixtures__/expected'), 'utf8');
 
-test('gendiff', () => {
-  expect(genDiff(data1, data2)).toBe(expected);
+const data1JSON = path.resolve(__dirname, '__fixtures__/before.json');
+const data2JSON = path.resolve(__dirname, '__fixtures__/after.json');
+
+const data1YML = path.resolve(__dirname, '__fixtures__/before.yml');
+const data2YML = path.resolve(__dirname, '__fixtures__/after.yml');
+
+test('gendiff JSON', () => {
+  expect(genDiff(data1JSON, data2JSON)).toBe(expected);
+});
+
+test('gendiff YML', () => {
+  expect(genDiff(data1YML, data2YML)).toBe(expected);
 });
