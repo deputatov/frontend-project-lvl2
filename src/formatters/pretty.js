@@ -5,7 +5,7 @@ const turnToString = (data, indent) => {
   return data;
 };
 
-const render = (ast) => {
+const pretty = (ast) => {
   const tab = '  ';
   const stringBuilder = (data, indentCounter) => {
     const indent = tab.repeat(indentCounter);
@@ -30,4 +30,4 @@ const render = (ast) => {
   return `{\n${stringBuilder(ast, 1)}\n}`;
 };
 
-export default render;
+export default pretty;
