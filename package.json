@@ -1,6 +1,6 @@
 {
   "name": "frontend-project-lvl2-deputatovn",
-  "version": "0.0.4",
+  "version": "1.0.0",
   "description": "frontend project difference calculator",
   "bin": {
     "gendiff": "dist/bin/gendiff.js"
