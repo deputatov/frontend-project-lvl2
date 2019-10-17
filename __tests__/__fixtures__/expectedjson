@@ -1,0 +1,98 @@
+[
+  {
+    "state": "compare",
+    "name": "common",
+    "currentData": [
+      {
+        "state": "unmodified",
+        "name": "setting1",
+        "currentData": "Value 1"
+      },
+      {
+        "state": "removed",
+        "name": "setting2",
+        "removedData": "200"
+      },
+      {
+        "state": "modified",
+        "name": "setting3",
+        "currentData": {
+          "key": "value"
+        },
+        "removedData": true
+      },
+      {
+        "state": "compare",
+        "name": "setting6",
+        "currentData": [
+          {
+            "state": "unmodified",
+            "name": "key",
+            "currentData": "value"
+          },
+          {
+            "state": "added",
+            "name": "ops",
+            "currentData": "vops"
+          }
+        ]
+      },
+      {
+        "state": "added",
+        "name": "follow",
+        "currentData": false
+      },
+      {
+        "state": "added",
+        "name": "setting4",
+        "currentData": "blah blah"
+      },
+      {
+        "state": "added",
+        "name": "setting5",
+        "currentData": {
+          "key5": "value5"
+        }
+      }
+    ]
+  },
+  {
+    "state": "compare",
+    "name": "group1",
+    "currentData": [
+      {
+        "state": "modified",
+        "name": "baz",
+        "currentData": "bars",
+        "removedData": "bas"
+      },
+      {
+        "state": "unmodified",
+        "name": "foo",
+        "currentData": "bar"
+      },
+      {
+        "state": "modified",
+        "name": "nest",
+        "currentData": "str",
+        "removedData": {
+          "key": "value"
+        }
+      }
+    ]
+  },
+  {
+    "state": "removed",
+    "name": "group2",
+    "removedData": {
+      "abc": "12345"
+    }
+  },
+  {
+    "state": "added",
+    "name": "group3",
+    "currentData": {
+      "fee": "100500"
+    }
+  }
+]

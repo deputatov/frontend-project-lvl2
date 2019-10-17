@@ -22,7 +22,6 @@ Output formatters:
 * pretty
 * json
 
-
 ## Install
 
 To use gendiff as an application install it globally:
@@ -49,26 +48,50 @@ Options:
 ```
 ## Examples
 
-### JSON
+### Compare json files
 
 ```
 $ gendiff file1.json file2.json
 ```
 
-<p align="center"> <img width=auto height=auto src="gif/jsonplain.gif"> </p>
+<p align="center"> <img width=auto height=auto src="gif/jsonflat.gif"> </p>
 
-### YAML
+### Compare yaml files
 
 ```
 $ gendiff file1.yml file2.yml
 ```
 
-<p align="center"> <img width=auto height=auto src="gif/ymlplain.gif"> </p>
+<p align="center"> <img width=auto height=auto src="gif/ymlflat.gif"> </p>
 
-### INI
+### Compare ini files
 
 ```
 $ gendiff file1.ini file2.ini
 ```
 
-<p align="center"> <img width=auto height=auto src="gif/iniplain.gif"> </p>
+<p align="center"> <img width=auto height=auto src="gif/iniflat.gif"> </p>
+
+### Pretty output (default)
+
+```
+$ gendiff file1.json file2.json
+```
+
+<p align="center"> <img width=auto height=auto src="gif/prettyoutput.gif"> </p>
+
+### Plain output
+
+```
+$ gendiff -f plain file1.json file2.json
+```
+
+<p align="center"> <img width=auto height=auto src="gif/plainoutput.gif"> </p>
+
+### JSON output
+
+```
+$ gendiff -f json file1.json file2.json
+```
+
+<p align="center"> <img width=auto height=auto src="gif/jsonoutput.gif"> </p>

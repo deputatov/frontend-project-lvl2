@@ -8,8 +8,10 @@ export default () => {
     .description('Compares two configuration files and shows a difference.')
     .option('-f, --format <type>', 'Output format', 'pretty')
     .arguments('<pathToFile1> <pathToFile2>')
-    .action((pathToFile1, pathToFile2) => console.log(genDiff(pathToFile1,
-      pathToFile2, commander.format)))
+    .action((pathToFile1, pathToFile2) => {
+      const result = genDiff(pathToFile1, pathToFile2, commander.format);
+      console.log(result);
+    })
     .parse(process.argv);
 
   if (!commander.args.length) commander.help();
