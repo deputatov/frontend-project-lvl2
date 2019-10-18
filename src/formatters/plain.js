@@ -1,4 +1,4 @@
-const getNewPath = (ancestry, name) => (ancestry.length === 0 ? name : `${ancestry}.${name}`);
+const joinPath = (ancestry, name) => (ancestry.length === 0 ? name : `${ancestry}.${name}`);
 
 const convert = (value) => {
   if (value instanceof Object) return '[complex value]';
@@ -7,25 +7,20 @@ const convert = (value) => {
 };
 
 const plain = (ast) => {
-  const stringBuilder = (data, path) => data.map(({
+  const stringBuild = (data, path) => data.map(({
     state, name, currentData, removedData,
   }) => {
-    const newAncestry = getNewPath(path, name);
-    if (state === 'compare' && currentData instanceof Array) {
-      return stringBuilder(currentData, newAncestry);
-    }
-    if (state === 'removed') {
-      return `Property '${newAncestry}' was removed`;
-    }
-    if (state === 'added') {
-      return `Property '${newAncestry}' was added with value: ${convert(currentData)}`;
-    }
-    if (state === 'modified') {
-      return `Property '${newAncestry}' was updated. From ${convert(removedData)} to ${convert(currentData)}`;
-    }
-    return false;
+    const fullPath = joinPath(path, name);
+    const actions = {
+      compare: () => stringBuild(currentData, fullPath),
+      removed: () => `Property '${fullPath}' was removed`,
+      added: () => `Property '${fullPath}' was added with value: ${convert(currentData)}`,
+      modified: () => `Property '${fullPath}' was updated. From ${convert(removedData)} to ${convert(currentData)}`,
+      unmodified: () => '',
+    };
+    return actions[state]();
   }).filter((item) => item).join('\n');
-  return stringBuilder(ast, '');
+  return stringBuild(ast, '');
 };
 
 export default plain;

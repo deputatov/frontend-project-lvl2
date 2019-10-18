@@ -1,33 +1,34 @@
-const turnToString = (data, indent) => {
+const tab = '  ';
+const tabsCount = 2;
+
+const convert = (data, indent) => {
   if (data instanceof Object) {
-    return Object.entries(data).map(([key, value]) => `{\n${indent}      ${key}: ${value}\n${indent}  }`);
+    return Object.entries(data).map(([key, value]) => `{\n${indent}${tab.repeat(3)}${key}: ${value}\n${indent}${tab}}`);
   }
   return data;
 };
 
+const getExtraIndent = (data) => (data.find((value) => (
+  value.state === 'added' || value.state === 'removed' || value.state === 'modified')) ? 1 : 0);
+
 const pretty = (ast) => {
-  const tab = '  ';
-  const stringBuilder = (data, indentCounter) => {
+  const stringBuild = (data, indentCounter) => {
     const indent = tab.repeat(indentCounter);
+    const extraIndent = tab.repeat(getExtraIndent(data));
     return data.map(({
       state, name, currentData, removedData,
     }) => {
-      if (state === 'compare' && currentData instanceof Array) {
-        return `${indent}  ${name}: {\n${stringBuilder(currentData, indentCounter + 2)}\n${indent}  }`;
-      }
-      if (state === 'unmodified') {
-        return `${indent}  ${name}: ${turnToString(currentData, indent)}`;
-      }
-      if (state === 'removed') {
-        return `${indent}- ${name}: ${turnToString(removedData, indent)}`;
-      }
-      if (state === 'added') {
-        return `${indent}+ ${name}: ${turnToString(currentData, indent)}`;
-      }
-      return `${indent}+ ${name}: ${turnToString(currentData, indent)}\n${indent}- ${name}: ${turnToString(removedData, indent)}`;
+      const actions = {
+        compare: () => `${indent}${extraIndent}${name}: {\n${stringBuild(currentData, indentCounter + tabsCount)}\n${extraIndent}${indent}}`,
+        unmodified: () => `${indent}${extraIndent}${name}: ${convert(currentData, indent)}`,
+        removed: () => `${indent}- ${name}: ${convert(removedData, indent)}`,
+        added: () => `${indent}+ ${name}: ${convert(currentData, indent)}`,
+        modified: () => `${indent}+ ${name}: ${convert(currentData, indent)}\n${indent}- ${name}: ${convert(removedData, indent)}`,
+      };
+      return actions[state]();
     }).join('\n');
   };
-  return `{\n${stringBuilder(ast, 1)}\n}`;
+  return `{\n${stringBuild(ast, 1)}\n}`;
 };
 
 export default pretty;

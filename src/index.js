@@ -9,7 +9,7 @@ const parseFile = (filepath) => {
     if (err) throw err;
     return data;
   });
-  const extension = path.extname(filepath);
+  const extension = path.extname(filepath).slice(1);
   return parsers(extension)(fileData);
 };
 
