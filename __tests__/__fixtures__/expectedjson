@@ -1,55 +1,55 @@
 [
   {
-    "state": "compare",
-    "name": "common",
-    "currentData": [
+    "type": "nested",
+    "key": "common",
+    "children": [
       {
-        "state": "unmodified",
-        "name": "setting1",
+        "type": "unmodified",
+        "key": "setting1",
         "currentData": "Value 1"
       },
       {
-        "state": "removed",
-        "name": "setting2",
+        "type": "removed",
+        "key": "setting2",
         "removedData": "200"
       },
       {
-        "state": "modified",
-        "name": "setting3",
+        "type": "modified",
+        "key": "setting3",
         "currentData": {
           "key": "value"
         },
         "removedData": true
       },
       {
-        "state": "compare",
-        "name": "setting6",
-        "currentData": [
+        "type": "nested",
+        "key": "setting6",
+        "children": [
           {
-            "state": "unmodified",
-            "name": "key",
+            "type": "unmodified",
+            "key": "key",
             "currentData": "value"
           },
           {
-            "state": "added",
-            "name": "ops",
+            "type": "added",
+            "key": "ops",
             "currentData": "vops"
           }
         ]
       },
       {
-        "state": "added",
-        "name": "follow",
+        "type": "added",
+        "key": "follow",
         "currentData": false
       },
       {
-        "state": "added",
-        "name": "setting4",
+        "type": "added",
+        "key": "setting4",
         "currentData": "blah blah"
       },
       {
-        "state": "added",
-        "name": "setting5",
+        "type": "added",
+        "key": "setting5",
         "currentData": {
           "key5": "value5"
         }
@@ -57,23 +57,23 @@
     ]
   },
   {
-    "state": "compare",
-    "name": "group1",
-    "currentData": [
+    "type": "nested",
+    "key": "group1",
+    "children": [
       {
-        "state": "modified",
-        "name": "baz",
+        "type": "modified",
+        "key": "baz",
         "currentData": "bars",
         "removedData": "bas"
       },
       {
-        "state": "unmodified",
-        "name": "foo",
+        "type": "unmodified",
+        "key": "foo",
         "currentData": "bar"
       },
       {
-        "state": "modified",
-        "name": "nest",
+        "type": "modified",
+        "key": "nest",
         "currentData": "str",
         "removedData": {
           "key": "value"
@@ -82,15 +82,15 @@
     ]
   },
   {
-    "state": "removed",
-    "name": "group2",
+    "type": "removed",
+    "key": "group2",
     "removedData": {
       "abc": "12345"
     }
   },
   {
-    "state": "added",
-    "name": "group3",
+    "type": "added",
+    "key": "group3",
     "currentData": {
       "fee": "100500"
     }

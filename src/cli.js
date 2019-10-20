@@ -2,7 +2,7 @@ import commander from 'commander';
 import packageJSON from '../package.json';
 import genDiff from '.';
 
-export default () => {
+const runCLI = () => {
   commander
     .version(packageJSON.version)
     .description('Compares two configuration files and shows a difference.')
@@ -16,3 +16,5 @@ export default () => {
 
   if (!commander.args.length) commander.help();
 };
+
+export default runCLI;

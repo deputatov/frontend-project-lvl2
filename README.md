@@ -6,7 +6,7 @@
 
 Project [frontend-project-lvl2](https://ru.hexlet.io/professions/frontend/projects/46)
 
-Mentor ?
+Mentor [Kirill Mokevnin](https://ru.hexlet.io/u/mokevnin)
 
 In project developed application **gendiff** that finds differences in configuration files
 

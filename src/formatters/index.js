@@ -1,11 +1,11 @@
-import plain from './plain';
-import pretty from './pretty';
-import json from './json';
+import renderPlain from './plain';
+import renderPretty from './pretty';
+import renderJSON from './json';
 
 const formatters = {
-  plain,
-  pretty,
-  json,
+  plain: renderPlain,
+  pretty: renderPretty,
+  json: renderJSON,
 };
 
 export default (data, format) => formatters[format](data);

@@ -1,34 +1,31 @@
+import flatten from 'lodash/flatten';
+
 const tab = '  ';
 const tabsCount = 2;
 
 const convert = (data, indent) => {
-  if (data instanceof Object) {
-    return Object.entries(data).map(([key, value]) => `{\n${indent}${tab.repeat(3)}${key}: ${value}\n${indent}${tab}}`);
-  }
-  return data;
+  if (!(data instanceof Object)) return data;
+  return Object.entries(data).map(([key, value]) => `{\n${indent}${tab.repeat(3)}${key}: ${value}\n${indent}${tab}}`);
 };
 
-const getExtraIndent = (data) => (data.find((value) => (
-  value.state === 'added' || value.state === 'removed' || value.state === 'modified')) ? 1 : 0);
-
-const pretty = (ast) => {
-  const stringBuild = (data, indentCounter) => {
+const renderPretty = (ast) => {
+  const genItems = (indentCounter, data) => {
     const indent = tab.repeat(indentCounter);
-    const extraIndent = tab.repeat(getExtraIndent(data));
-    return data.map(({
-      state, name, currentData, removedData,
+    const func = ({
+      type, key, children, currentData, removedData,
     }) => {
       const actions = {
-        compare: () => `${indent}${extraIndent}${name}: {\n${stringBuild(currentData, indentCounter + tabsCount)}\n${extraIndent}${indent}}`,
-        unmodified: () => `${indent}${extraIndent}${name}: ${convert(currentData, indent)}`,
-        removed: () => `${indent}- ${name}: ${convert(removedData, indent)}`,
-        added: () => `${indent}+ ${name}: ${convert(currentData, indent)}`,
-        modified: () => `${indent}+ ${name}: ${convert(currentData, indent)}\n${indent}- ${name}: ${convert(removedData, indent)}`,
+        nested: () => `${indent}${tab}${key}: {\n${genItems(indentCounter + tabsCount, children)}\n${tab}${indent}}`,
+        unmodified: () => `${indent}${tab}${key}: ${convert(currentData, indent)}`,
+        removed: () => `${indent}- ${key}: ${convert(removedData, indent)}`,
+        added: () => `${indent}+ ${key}: ${convert(currentData, indent)}`,
+        modified: () => [actions.added(), actions.removed()],
       };
-      return actions[state]();
-    }).join('\n');
+      return actions[type]();
+    };
+    return flatten(data.map(func)).join('\n');
   };
-  return `{\n${stringBuild(ast, 1)}\n}`;
+  return `{\n${genItems(1, ast)}\n}`;
 };
 
-export default pretty;
+export default renderPretty;
