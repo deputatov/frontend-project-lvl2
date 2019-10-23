@@ -16,7 +16,7 @@ const renderPlain = (ast, path = '') => {
       removed: () => `Property '${fullPath}' was removed`,
       added: () => `Property '${fullPath}' was added with value: ${convert(currentData)}`,
       modified: () => `Property '${fullPath}' was updated. From ${convert(removedData)} to ${convert(currentData)}`,
-      unmodified: () => '',
+      unmodified: () => null,
     };
     return actions[type]();
   };

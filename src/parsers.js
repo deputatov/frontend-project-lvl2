@@ -7,4 +7,4 @@ const parsers = {
   ini: ini.parse,
 };
 
-export default (type) => parsers[type];
+export default (type, filedata) => parsers[type](filedata);
